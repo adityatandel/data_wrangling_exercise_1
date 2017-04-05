@@ -1,0 +1,11 @@
+View(refine_original)
+refine_original %>% separate("Product code / number", c("product_code", "product_number"), sep = "-")
+refine_original <- refine_original %>% separate("Product code / number", c("product_code", "product_number"), sep = "-")
+refine_original <- unite(refine_original, "full_address", address, city, country, sep ",")
+
+refine_original %>% mutate(product_category = product_code)
+refine_original <- refine_original %>% mutate(product_category = product_code)
+refine_original$product_category <- gsub(pattern = "p", replacement = "Smartphone", x = refine_original$product_category)
+refine_original$product_category <- gsub(pattern = "v", replacement = "TV", x = refine_original$product_category)
+refine_original$product_category <- gsub(pattern = "x", replacement = "Laptop", x = refine_original$product_category)
+refine_original$product_category <- gsub(pattern = "q", replacement = "Tablet", x = refine_original$product_category)
